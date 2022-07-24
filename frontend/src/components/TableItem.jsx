@@ -8,20 +8,17 @@ const TableItem = (props) => {
     const [modal, setModal] = useState('')
     
     return (
-        <div className='table-item'>
-            <p>seats: {props.table.seats}</p>
-            <p>table type: {props.table.table_type}</p>
-            <p>price: {props.table.price}</p>
+        <tr className='table-item'>
+            <td>{props.table.id}</td>
+            <td>{props.table.seats}</td>
+            <td>{props.table.table_type}</td>
+            <td>{props.table.price}</td>
+            <td><button onClick={() => {setModal(true)}}>Book</button></td>
 
-            <div className='table-item-btns'>
-            <button onClick={() => {setModal(true)}}>Book</button>
             <MyModal visible={modal} setVisible={setModal}>
                 <OrderCreateForm table_id={props.table.id}/>
-            </MyModal>
-
-            </div>
-            
-        </div>
+            </MyModal>  
+        </tr>
     );
 };
 

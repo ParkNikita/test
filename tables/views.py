@@ -12,7 +12,7 @@ class TableListView(APIView):
     permission_classes = []
 
     def get(self, request, *args, **kwargs):
-        queryset = models.Table.objects.all()
+        queryset = models.Table.objects.filter(is_free=True).order_by('table_type')
         serializer = serializers.TableSerializer(queryset, many=True)
         return Response(serializer.data, status=200)
 
@@ -48,6 +48,8 @@ class CreateTableView(APIView):
 
 
 class OrderListView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request, *args, **kwargs):
         queryset = models.Order.objects.all()
         serializer = serializers.OrderSerializer(queryset, many=True)

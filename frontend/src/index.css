@@ -13,27 +13,26 @@ code {
 }
 
 
-.table-item {
-  display: flex;
-  padding: 20px;
-  border: 2px solid black;
-  margin-top: 15px;
-  justify-content: space-between;
-  align-items: center;
-
-}
-
-.table-item-btns {
-  display: flex;
-  height: 30px;
-}
-
-.table-list {
-  display: flex;
-  flex-direction: column;
+.App {
   margin: 20px;
 }
 
-.table-filter {
-  margin: 20px;
+.table-list, .order-list {
+  margin-top: 10px;
 }
+
+.table-list table, .order-list table {
+  width: 60%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.table-list thead, .order-list thead {
+background: rgb(209, 209, 209);
+}
+
+.table-list tbody, .order-list tbody  {
+  background: rgb(255, 243, 243);
+}
+
+

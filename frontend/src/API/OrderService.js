@@ -12,7 +12,7 @@ export default class OrderService {
     }
 
     static async updateOrder(status, id) {
-        const response = await api.post(`orders/${id}/`, {status})
+        const response = await api.put(`orders/${id}/`, {status})
         return response
     }
 

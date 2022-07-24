@@ -1,17 +1,29 @@
-import React from 'react';
 import TableItem from './TableItem';
 
 const TableList = ({tables}) => {
     
     return (
         <div className='table-list'>
-            {tables.map(table=> 
-                    <TableItem 
-                    table={table}
-                    key={table.id}
-                    />
-                    
-                )}
+            <h2>Tables</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Seats</th>
+                        <th>Table type</th>
+                        <th>Price</th>
+                        <th>Book</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tables.map(table=> 
+                        <TableItem 
+                        table={table}
+                        key={table.id}
+                        /> 
+                    )}    
+                </tbody>
+            </table>
         </div>
     );
 };
