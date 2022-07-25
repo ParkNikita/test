@@ -7,6 +7,7 @@ app_name = 'tables'
 urlpatterns = [
     path('tables/', views.TableListView.as_view(), name='table-list'),
     path('tables/create/', views.CreateTableView.as_view(), name='table-create'),
+    path('tables/<int:id>/', views.UpdateTableView.as_view(), name='table-update'),
     path('tables/filter/', views.FilterTableListView.as_view(), name='table-filter'),
     path('orders/', views.OrderListView.as_view(), name='order-list'),
     path('orders/create/', views.CreateOrderView.as_view(), name='order-create'),

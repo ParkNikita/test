@@ -1,5 +1,10 @@
-from pyexpat import model
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from django.db import models
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+
+from django.conf import settings
 
 # Create your models here.
 
@@ -31,13 +36,24 @@ class Order(models.Model):
         (CANCELED, 'Canceled')
     )
     status = models.CharField(max_length=9 ,choices=STATUS_CHOICES, default='PENDING')
-    email = models.EmailField(null=True, blank=True)
-    tables = models.ManyToManyField(Table, related_name='order', blank=True)
+    email = models.EmailField()
+    tables = models.ManyToManyField(Table, related_name='order')
 
     def __str__(self):
         return str(self.email)
 
-        
+
+@receiver(post_save, sender=Order)
+def send_mail_on_create(sender, instance, created=False, **kwargs):
+    if created:
+        template = render_to_string('tables/emailForm.html')
+        subject, from_email, to = 'Order Api', settings.EMAIL_HOST_USER, instance.email
+        text_content = ''
+        html_content = template
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
 
 # class OrderTable(models.Model):
 #     table = models.ForeignKey(Table, on_delete=models.CASCADE)

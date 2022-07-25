@@ -16,4 +16,10 @@ export default class TableService {
         return response
     }
 
+    static async updateTable(id, is_free) {
+        const response = await api.put(`tables/${id}/`, {is_free})
+        return response
+    }
+
+
 }

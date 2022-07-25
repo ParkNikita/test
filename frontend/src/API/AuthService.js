@@ -1,4 +1,6 @@
 import api from ".";
+import axios from "axios";
+
 
 export default class AuthService {
     static async login(username, password) {
@@ -21,6 +23,18 @@ export default class AuthService {
         localStorage.removeItem('username');
         localStorage.removeItem('isAuth')
 
+    }
+
+    static async checkAuth() {
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/token/refresh/', {refresh: localStorage.getItem('refresh-token')})
+            localStorage.setItem('token', response.data.access);
+            localStorage.setItem('isAuth', true)
+            localStorage.setItem('username', response.data.user)
+        } catch (e) {
+            console.log(e.response?.data?.message);
+            return e
+        }
     }
 }
 

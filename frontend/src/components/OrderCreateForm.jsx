@@ -16,7 +16,7 @@ const OrderCreateForm = ({table_id}) => {
     }
 
     return (
-        <div className='table-filter'>
+        <div className='table-create'>
             <MyLabel for="email">Email</MyLabel>
             <MyInput
                 onChange={e => setEmail(e.target.value)}

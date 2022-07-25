@@ -1,4 +1,3 @@
-from curses import meta
 from rest_framework import serializers
 
 from . import models
@@ -25,6 +24,11 @@ class TableSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_is_free(self, obj):
         return obj.is_free
+
+    def update(self, instance, validated_data):
+        instance.is_free = validated_data.get('is_free', instance.is_free)
+        instance.save()
+        return instance
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):

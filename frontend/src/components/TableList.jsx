@@ -12,7 +12,12 @@ const TableList = ({tables}) => {
                         <th>Seats</th>
                         <th>Table type</th>
                         <th>Price</th>
+                        <th>Free</th>
                         <th>Book</th>
+                        {localStorage.getItem('isAuth') === 'true' &&
+                        <th>Update</th>
+                        }
+                        
                     </tr>
                 </thead>
                 <tbody>

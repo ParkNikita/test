@@ -2,10 +2,11 @@ import { useState } from 'react';
 
 import MyModal from './UI/modal/MyModal';
 import OrderCreateForm from './OrderCreateForm';
-
+import TableUpdate from './TableUpdate';
 
 const TableItem = (props) => {
-    const [modal, setModal] = useState('')
+    const [modalBook, setModalBook] = useState('')
+    const [modalUpdate, setModalUpdate] = useState('')
     
     return (
         <tr className='table-item'>
@@ -13,11 +14,28 @@ const TableItem = (props) => {
             <td>{props.table.seats}</td>
             <td>{props.table.table_type}</td>
             <td>{props.table.price}</td>
-            <td><button onClick={() => {setModal(true)}}>Book</button></td>
+            <td>
+                {props.table.is_free
+                ? 'Yes'
+                : 'No'
+                }
 
-            <MyModal visible={modal} setVisible={setModal}>
+            </td>
+            <td><button onClick={() => {setModalBook(true)}}>Book</button></td>
+            {localStorage.getItem('isAuth') === 'true' &&
+                <td><button onClick={() => {setModalUpdate(true)}}>Update</button></td>
+            }
+            
+            
+            
+
+            <MyModal visible={modalBook} setVisible={setModalBook}>
                 <OrderCreateForm table_id={props.table.id}/>
-            </MyModal>  
+            </MyModal>
+            
+            <MyModal visible={modalUpdate} setVisible={setModalUpdate}>
+                <TableUpdate modal={setModalUpdate} table_id={props.table.id}/>
+            </MyModal>    
         </tr>
     );
 };

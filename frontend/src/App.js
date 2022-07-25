@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import TableService from "./API/TableService"
 
+import AuthService from "./API/AuthService"
 import TableList from "./components/TableList"
 import TableFilter from "./components/TableFilter"
 import MyModal from "./components/UI/modal/MyModal"
@@ -16,6 +17,13 @@ function App() {
   const [createModal, setCreateModal] = useState('')
   const [tables, setTables] = useState([])
   const [orders, setOrders] = useState([])
+
+  useEffect( () => {
+    if (localStorage.getItem('token')) {
+      AuthService.checkAuth()
+      
+    }
+  }, [])
 
   const fetchOrders = async() => {
       const response = await OrderService.getAllOrders()
